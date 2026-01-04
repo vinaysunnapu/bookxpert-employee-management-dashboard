@@ -49,11 +49,6 @@ const AddEmployee: React.FC = () => {
         message: `${employeeData.fullName} has been added to the system.`,
       });
       setShowModal(true);
-
-      // Redirect to dashboard after modal closes
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 3100);
     } catch (error) {
       setModalConfig({
         type: 'error',
@@ -63,6 +58,16 @@ const AddEmployee: React.FC = () => {
       setShowModal(true);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleModalClose = () => {
+    // If success modal, navigate to dashboard immediately
+    if (modalConfig.type === 'success') {
+      navigate('/dashboard');
+    } else {
+      // For error modal, just close it
+      setShowModal(false);
     }
   };
 
@@ -100,8 +105,8 @@ const AddEmployee: React.FC = () => {
         type={modalConfig.type}
         title={modalConfig.title}
         message={modalConfig.message}
-        onClose={() => setShowModal(false)}
-        autoClose={3000}
+        onClose={handleModalClose}
+        autoClose={modalConfig.type === 'success' ? 3000 : 3000}
       />
     </div>
   );

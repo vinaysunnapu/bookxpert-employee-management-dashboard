@@ -11,6 +11,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
   submitButtonText = 'Add Employee',
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dragZoneRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
   
   const [formData, setFormData] = useState({
     fullName: initialData?.fullName || '',
@@ -59,6 +61,29 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
+  const processFile = (file: File) => {
+    // Check file size (max 5MB)
+    if (file.size > MAX_IMAGE_SIZE) {
+      setErrors(prev => ({ ...prev, profileImage: 'Image size must be less than 5MB' }));
+      return;
+    }
+
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      setErrors(prev => ({ ...prev, profileImage: 'Please select a valid image file' }));
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      setPreviewImage(result);
+      setFormData(prev => ({ ...prev, profileImage: result }));
+      setErrors(prev => ({ ...prev, profileImage: undefined }));
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -70,26 +95,31 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Check file size (max 5MB)
-      if (file.size > MAX_IMAGE_SIZE) {
-        setErrors(prev => ({ ...prev, profileImage: 'Image size must be less than 5MB' }));
-        return;
-      }
+      processFile(file);
+    }
+  };
 
-      // Check file type
-      if (!file.type.startsWith('image/')) {
-        setErrors(prev => ({ ...prev, profileImage: 'Please select a valid image file' }));
-        return;
-      }
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        setPreviewImage(result);
-        setFormData(prev => ({ ...prev, profileImage: result }));
-        setErrors(prev => ({ ...prev, profileImage: undefined }));
-      };
-      reader.readAsDataURL(file);
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      processFile(file);
     }
   };
 
@@ -147,14 +177,21 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
                 onChange={handleImageChange}
                 className="hidden"
               />
-              <button
-                type="button"
+              <div
+                ref={dragZoneRef}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                className={`w-full px-6 py-4 border-2 border-dashed rounded-2xl transition-all text-white font-bold text-lg backdrop-blur-md cursor-pointer ${
+                  isDragging
+                    ? 'border-blue-500 bg-blue-500/20 shadow-lg shadow-blue-500/50'
+                    : 'border-white/30 hover:border-blue-500 hover:bg-blue-500/10'
+                }`}
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full px-6 py-4 border-2 border-dashed border-white/30 rounded-2xl hover:border-blue-500 hover:bg-blue-500/10 transition-all text-white font-bold text-lg backdrop-blur-md cursor-pointer"
               >
                 <Upload size={24} className="mx-auto mb-3" />
                 Click to upload or drag and drop
-              </button>
+              </div>
               <p className="text-sm text-slate-400 mt-3">PNG, JPG, GIF up to 5MB</p>
               {errors.profileImage && (
                 <p className="text-sm text-rose-400 mt-3 font-semibold">{errors.profileImage}</p>
