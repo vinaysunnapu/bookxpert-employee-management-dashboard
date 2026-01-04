@@ -11,33 +11,33 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
   loading = false,
 }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+    <div className="bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
       {loading ? (
-        <div className="p-20 text-center text-slate-500">Loading employees...</div>
+        <div className="p-20 text-center text-slate-400 text-lg font-semibold">Loading employees...</div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-slate-50 border-b border-slate-200 sticky top-0">
+            <thead className="bg-gradient-to-r from-white/10 to-white/5 border-b border-white/10 sticky top-0">
               <tr>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest">
                   Employee ID
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest">
                   Full Name
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest">
                   Gender
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest">
                   Date of Birth
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest">
                   State
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest">
                   Active
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-700 uppercase tracking-wider text-right">
+                <th className="px-6 py-5 text-xs font-bold text-white uppercase tracking-widest text-right">
                   Actions
                 </th>
               </tr>
@@ -57,7 +57,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
               ) : (
                 <tr>
                   <td colSpan={7} className="px-6 py-20 text-center">
-                    <p className="text-slate-400 font-medium">No employees found matching your criteria.</p>
+                    <p className="text-slate-300 font-semibold text-lg">No employees found matching your criteria.</p>
                   </td>
                 </tr>
               )}

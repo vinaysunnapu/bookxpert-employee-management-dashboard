@@ -63,10 +63,10 @@ const EditEmployee: React.FC = () => {
 
   if (isLoadingEmployee) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
         <Header onLogout={handleLogout} />
         <main className="flex-1 pt-28 p-6 lg:p-10 flex items-center justify-center">
-          <p className="text-slate-500">Loading employee data...</p>
+          <p className="text-slate-300 text-xl font-semibold">Loading employee data...</p>
         </main>
       </div>
     );
@@ -77,23 +77,23 @@ const EditEmployee: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
       <Header onLogout={handleLogout} />
 
-      <main className="flex-1 pt-28 p-6 lg:p-10">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:text-indigo-700 font-medium mb-6 transition-colors"
-        >
-          <ArrowLeft size={20} />
-          Back to Dashboard
-        </button>
-
-        {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-800">Edit Employee</h1>
-          <p className="text-slate-500 mt-2">Update the employee information below.</p>
+      <main className="flex-1 mt-12 pt-28 p-6 lg:p-10">
+        {/* Page Header with Back Button */}
+        <div className="mb-10 flex items-start gap-4">
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 font-bold transition-all border border-blue-500/30 hover:border-blue-500/60 flex-shrink-0 mt-1"
+            title="Back to Dashboard"
+          >
+            <ArrowLeft size={24} />
+          </button>
+          <div>
+            <h1 className="text-5xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Edit Employee</h1>
+            <p className="text-slate-300 mt-3 text-lg font-medium">Update employee information and keep records current.</p>
+          </div>
         </div>
 
         {/* Form */}

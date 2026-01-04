@@ -10,23 +10,23 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white border-b border-slate-200 shadow-sm z-50">
+    <header className="fixed top-0 left-0 right-0 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-white/10 shadow-2xl z-50 backdrop-blur-xl">
       <div className="px-6 lg:px-10 py-4 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">BX</span>
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg transform transition-transform hover:scale-110">
+            <span className="text-white font-black text-xl">BX</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-800">BookXpert</h1>
-            <p className="text-xs text-slate-500">Employee Management Dashboard</p>
+            <h1 className="text-2xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">BookXpert</h1>
+            <p className="text-xs text-slate-400 font-semibold">Fintech Employee Dashboard</p>
           </div>
         </div>
 
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl transition-all font-medium"
+          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500/20 to-pink-500/20 hover:from-rose-500/30 hover:to-pink-500/30 text-rose-300 rounded-xl transition-all font-semibold border border-rose-500/30 hover:border-rose-500/60 shadow-lg hover:shadow-xl"
           title="Logout from your account"
         >
           <LogOut size={18} />

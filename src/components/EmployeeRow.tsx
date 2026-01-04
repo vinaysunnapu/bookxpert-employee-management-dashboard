@@ -21,23 +21,23 @@ const EmployeeRow: React.FC<EmployeeRowProps> = ({
   };
 
   return (
-    <tr className="hover:bg-slate-50/50 transition-colors group border-b border-slate-100 last:border-b-0">
-      <td className="px-6 py-4 text-sm font-medium text-slate-700">{employee.id}</td>
+    <tr className="hover:bg-white/5 transition-all group border-b border-white/10 last:border-b-0">
+      <td className="px-6 py-4 text-sm font-bold text-white/80">{employee.id}</td>
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-slate-200 border-2 border-white shadow-sm overflow-hidden flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-2 border-white/20 shadow-lg overflow-hidden flex-shrink-0">
             <img
               src={employee.profileImage}
               alt={employee.fullName}
               className="w-full h-full object-cover"
             />
           </div>
-          <span className="font-semibold text-slate-700">{employee.fullName}</span>
+          <span className="font-bold text-white">{employee.fullName}</span>
         </div>
       </td>
-      <td className="px-6 py-4 text-sm text-slate-600">{employee.gender}</td>
-      <td className="px-6 py-4 text-sm text-slate-600">{formatDate(employee.dateOfBirth)}</td>
-      <td className="px-6 py-4 text-sm text-slate-600">{employee.state}</td>
+      <td className="px-6 py-4 text-sm text-slate-300">{employee.gender}</td>
+      <td className="px-6 py-4 text-sm text-slate-300">{formatDate(employee.dateOfBirth)}</td>
+      <td className="px-6 py-4 text-sm text-slate-300">{employee.state}</td>
       <td className="px-6 py-4">
         <ActiveToggle
           isActive={employee.isActive}
@@ -46,10 +46,10 @@ const EmployeeRow: React.FC<EmployeeRowProps> = ({
         />
       </td>
       <td className="px-6 py-4 text-right">
-        <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex justify-end gap-2">
           <button
             onClick={() => onEdit(employee.id)}
-            className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+            className="p-2.5 text-blue-300 hover:text-blue-200 hover:bg-blue-500/20 rounded-lg transition-all border border-blue-500/30 hover:border-blue-500/60"
             title="Edit employee"
             aria-label={`Edit ${employee.fullName}`}
           >
@@ -57,7 +57,7 @@ const EmployeeRow: React.FC<EmployeeRowProps> = ({
           </button>
           <button
             onClick={() => onPrint(employee)}
-            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+            className="p-2.5 text-purple-300 hover:text-purple-200 hover:bg-purple-500/20 rounded-lg transition-all border border-purple-500/30 hover:border-purple-500/60"
             title="Print employee details"
             aria-label={`Print ${employee.fullName}`}
           >
@@ -65,7 +65,7 @@ const EmployeeRow: React.FC<EmployeeRowProps> = ({
           </button>
           <button
             onClick={() => onDelete(employee.id)}
-            className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"
+            className="p-2.5 text-rose-300 hover:text-rose-200 hover:bg-rose-500/20 rounded-lg transition-all border border-rose-500/30 hover:border-rose-500/60"
             title="Delete employee"
             aria-label={`Delete ${employee.fullName}`}
           >

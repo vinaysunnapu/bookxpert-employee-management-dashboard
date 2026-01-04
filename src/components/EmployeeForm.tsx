@@ -118,21 +118,21 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 lg:p-8">
+    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
+      <div className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10 p-8 lg:p-12">
         {/* Profile Image Section */}
-        <div className="mb-8">
-          <label className="block text-sm font-semibold text-slate-700 mb-4">Profile Image</label>
-          <div className="flex flex-col sm:flex-row gap-6">
+        <div className="mb-10">
+          <label className="block text-lg font-bold text-white mb-6">Profile Image</label>
+          <div className="flex flex-col sm:flex-row gap-8">
             {/* Image Preview */}
             <div className="flex-shrink-0">
-              <div className="w-32 h-32 rounded-xl bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden">
+              <div className="w-40 h-40 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border-2 border-dashed border-white/30 flex items-center justify-center overflow-hidden shadow-lg">
                 {previewImage ? (
                   <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <div className="text-center">
-                    <Upload size={32} className="text-slate-400 mx-auto mb-2" />
-                    <p className="text-xs text-slate-500">No image</p>
+                    <Upload size={48} className="text-white/40 mx-auto mb-3" />
+                    <p className="text-sm text-slate-400">No image</p>
                   </div>
                 )}
               </div>
@@ -150,23 +150,23 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full px-4 py-3 border-2 border-dashed border-slate-300 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-slate-600 font-medium"
+                className="w-full px-6 py-4 border-2 border-dashed border-white/30 rounded-2xl hover:border-blue-500 hover:bg-blue-500/10 transition-all text-white font-bold text-lg backdrop-blur-md"
               >
-                <Upload size={20} className="mx-auto mb-2" />
+                <Upload size={24} className="mx-auto mb-3" />
                 Click to upload or drag and drop
               </button>
-              <p className="text-xs text-slate-500 mt-2">PNG, JPG, GIF up to 5MB</p>
+              <p className="text-sm text-slate-400 mt-3">PNG, JPG, GIF up to 5MB</p>
               {errors.profileImage && (
-                <p className="text-sm text-rose-600 mt-2">{errors.profileImage}</p>
+                <p className="text-sm text-rose-400 mt-3 font-semibold">{errors.profileImage}</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Full Name */}
-        <div className="mb-6">
-          <label htmlFor="fullName" className="block text-sm font-semibold text-slate-700 mb-2">
-            Full Name <span className="text-rose-600">*</span>
+        <div className="mb-8">
+          <label htmlFor="fullName" className="block text-lg font-bold text-white mb-3">
+            Full Name <span className="text-rose-400">*</span>
           </label>
           <input
             type="text"
@@ -175,38 +175,38 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             value={formData.fullName}
             onChange={handleInputChange}
             placeholder="Enter full name"
-            className={`w-full px-4 py-2.5 rounded-xl border ${
-              errors.fullName ? 'border-rose-500' : 'border-slate-200'
-            } focus:ring-2 focus:ring-indigo-500 outline-none transition-all`}
+            className={`w-full px-5 py-3.5 rounded-xl border-2 ${
+              errors.fullName ? 'border-rose-500' : 'border-white/20'
+            } bg-white/5 backdrop-blur-md text-white placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium`}
           />
           {errors.fullName && (
-            <p className="text-sm text-rose-600 mt-2">{errors.fullName}</p>
+            <p className="text-sm text-rose-400 mt-2 font-semibold">{errors.fullName}</p>
           )}
         </div>
 
         {/* Gender and DOB - Two columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
           {/* Gender */}
           <div>
-            <label htmlFor="gender" className="block text-sm font-semibold text-slate-700 mb-2">
-              Gender <span className="text-rose-600">*</span>
+            <label htmlFor="gender" className="block text-lg font-bold text-white mb-3">
+              Gender <span className="text-rose-400">*</span>
             </label>
             <select
               id="gender"
               value={formData.gender}
               onChange={(e) => setFormData(prev => ({ ...prev, gender: e.target.value as any }))}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+              className="w-full px-5 py-3.5 rounded-xl border-2 border-white/20 bg-white/5 backdrop-blur-md text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium cursor-pointer hover:border-white/40"
             >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
+              <option value="Male" className="bg-slate-900">Male</option>
+              <option value="Female" className="bg-slate-900">Female</option>
+              <option value="Other" className="bg-slate-900">Other</option>
             </select>
           </div>
 
           {/* Date of Birth */}
           <div>
-            <label htmlFor="dateOfBirth" className="block text-sm font-semibold text-slate-700 mb-2">
-              Date of Birth <span className="text-rose-600">*</span>
+            <label htmlFor="dateOfBirth" className="block text-lg font-bold text-white mb-3">
+              Date of Birth <span className="text-rose-400">*</span>
             </label>
             <input
               type="date"
@@ -214,20 +214,20 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
               name="dateOfBirth"
               value={formData.dateOfBirth}
               onChange={handleInputChange}
-              className={`w-full px-4 py-2.5 rounded-xl border ${
-                errors.dateOfBirth ? 'border-rose-500' : 'border-slate-200'
-              } focus:ring-2 focus:ring-indigo-500 outline-none transition-all`}
+              className={`w-full px-5 py-3.5 rounded-xl border-2 ${
+                errors.dateOfBirth ? 'border-rose-500' : 'border-white/20'
+              } bg-white/5 backdrop-blur-md text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium cursor-pointer`}
             />
             {errors.dateOfBirth && (
-              <p className="text-sm text-rose-600 mt-2">{errors.dateOfBirth}</p>
+              <p className="text-sm text-rose-400 mt-2 font-semibold">{errors.dateOfBirth}</p>
             )}
           </div>
         </div>
 
         {/* State */}
-        <div className="mb-6">
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            State <span className="text-rose-600">*</span>
+        <div className="mb-8">
+          <label className="block text-lg font-bold text-white mb-3">
+            State <span className="text-rose-400">*</span>
           </label>
           <SelectInput
             value={formData.state}
@@ -236,28 +236,28 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             options={INDIAN_STATES.map(state => ({ value: state, label: state }))}
           />
           {errors.state && (
-            <p className="text-sm text-rose-600 mt-2">{errors.state}</p>
+            <p className="text-sm text-rose-400 mt-2 font-semibold">{errors.state}</p>
           )}
         </div>
 
         {/* Status Toggle */}
-        <div className="mb-8">
-          <label className="block text-sm font-semibold text-slate-700 mb-3">Status</label>
-          <div className="flex items-center gap-4">
+        <div className="mb-10">
+          <label className="block text-lg font-bold text-white mb-4">Status</label>
+          <div className="flex items-center gap-5">
             <button
               type="button"
               onClick={() => setFormData(prev => ({ ...prev, isActive: !prev.isActive }))}
-              className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
-                formData.isActive ? 'bg-emerald-500' : 'bg-slate-300'
+              className={`relative inline-flex h-10 w-16 items-center rounded-full transition-all ${
+                formData.isActive ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50' : 'bg-slate-600'
               }`}
             >
               <span
-                className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
-                  formData.isActive ? 'translate-x-7' : 'translate-x-1'
+                className={`inline-block h-8 w-8 transform rounded-full bg-white transition-transform shadow-md ${
+                  formData.isActive ? 'translate-x-8' : 'translate-x-1'
                 }`}
               />
             </button>
-            <span className={`font-medium ${formData.isActive ? 'text-emerald-600' : 'text-slate-600'}`}>
+            <span className={`font-bold text-lg ${formData.isActive ? 'text-emerald-400' : 'text-slate-400'}`}>
               {formData.isActive ? 'Active' : 'Inactive'}
             </span>
           </div>
@@ -267,7 +267,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full px-6 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white rounded-xl transition-all font-semibold shadow-md hover:shadow-lg"
+          className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 disabled:from-blue-400 disabled:via-purple-400 disabled:to-pink-400 text-white rounded-xl transition-all font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 disabled:scale-100"
         >
           {isLoading ? 'Processing...' : submitButtonText}
         </button>
