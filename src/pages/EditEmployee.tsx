@@ -35,7 +35,7 @@ const EditEmployee: React.FC = () => {
       });
       setShowModal(true);
       setTimeout(() => {
-        navigate('/dashboard');
+        navigate('/');
       }, 3100);
     }
     setIsLoadingEmployee(false);
@@ -85,7 +85,7 @@ const EditEmployee: React.FC = () => {
   const handleModalClose = () => {
     // If success modal, navigate to dashboard immediately
     if (modalConfig.type === 'success') {
-      navigate('/dashboard');
+      navigate('/');
     } else {
       // For error modal, just close it
       setShowModal(false);
@@ -115,7 +115,7 @@ const EditEmployee: React.FC = () => {
         {/* Page Header with Back Button */}
         <div className="mb-10 flex items-start gap-4">
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/')}
             className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 font-bold transition-all border border-blue-500/30 hover:border-blue-500/60 flex-shrink-0 mt-1 cursor-pointer"
             title="Back to Dashboard"
           >
