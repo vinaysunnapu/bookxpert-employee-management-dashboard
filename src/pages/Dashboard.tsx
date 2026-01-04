@@ -116,6 +116,13 @@ const Dashboard: React.FC = () => {
     setCurrentPage(1);
   }, [searchTerm, filterGender, filterStatus]);
 
+  // Adjust current page if it exceeds total pages (e.g., when deleting records on last page)
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
+    }
+  }, [totalPages, currentPage]);
+
   const handleLogout = () => {
     navigate('/');
   };
