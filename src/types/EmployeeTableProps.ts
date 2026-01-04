@@ -11,4 +11,7 @@ export interface EmployeeTableProps {
   onDelete: (id: string) => void;
   onToggleStatus: (id: string, status: boolean) => void;
   onPrint: (employee: Employee) => void;
+  currentPage?: number;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
 }

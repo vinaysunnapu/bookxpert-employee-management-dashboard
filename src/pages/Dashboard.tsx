@@ -19,6 +19,8 @@ const Dashboard: React.FC = () => {
   const [filterGender, setFilterGender] = useState('All');
   const [filterStatus, setFilterStatus] = useState('All');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 5;
 
   // Requirement: Prevent dashboard access without login [cite: 7]
   const navigate = useNavigate();
@@ -103,6 +105,17 @@ const Dashboard: React.FC = () => {
   const activeEmployees = employees.filter(emp => emp.isActive).length;
   const inactiveEmployees = employees.filter(emp => !emp.isActive).length;
 
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredEmployees.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedEmployees = filteredEmployees.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, filterGender, filterStatus]);
+
   const handleLogout = () => {
     navigate('/');
   };
@@ -180,12 +193,15 @@ const Dashboard: React.FC = () => {
 
         {/* 3. Employee List Table [cite: 12, 13] */}
         <EmployeeTable
-          employees={filteredEmployees}
+          employees={paginatedEmployees}
           onEdit={handleEdit}
           onDelete={handleDelete}
           onToggleStatus={handleToggleStatus}
           onPrint={handlePrint}
           loading={loading}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
         />
       </main>
     </div>
