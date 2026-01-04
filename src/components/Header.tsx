@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
       <div className="px-6 lg:px-10 py-4 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg transform transition-transform hover:scale-110">
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg transform transition-transform hover:scale-110 cursor-pointer">
             <span className="text-white font-black text-xl">BX</span>
           </div>
           <div>
@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500/20 to-pink-500/20 hover:from-rose-500/30 hover:to-pink-500/30 text-rose-300 rounded-xl transition-all font-semibold border border-rose-500/30 hover:border-rose-500/60 shadow-lg hover:shadow-xl"
+          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-rose-500/20 to-pink-500/20 hover:from-rose-500/30 hover:to-pink-500/30 text-rose-300 rounded-xl transition-all font-semibold border border-rose-500/30 hover:border-rose-500/60 shadow-lg hover:shadow-xl cursor-pointer"
           title="Logout from your account"
         >
           <LogOut size={18} />

@@ -150,7 +150,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full px-6 py-4 border-2 border-dashed border-white/30 rounded-2xl hover:border-blue-500 hover:bg-blue-500/10 transition-all text-white font-bold text-lg backdrop-blur-md"
+                className="w-full px-6 py-4 border-2 border-dashed border-white/30 rounded-2xl hover:border-blue-500 hover:bg-blue-500/10 transition-all text-white font-bold text-lg backdrop-blur-md cursor-pointer"
               >
                 <Upload size={24} className="mx-auto mb-3" />
                 Click to upload or drag and drop
@@ -247,7 +247,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
             <button
               type="button"
               onClick={() => setFormData(prev => ({ ...prev, isActive: !prev.isActive }))}
-              className={`relative inline-flex h-10 w-16 items-center rounded-full transition-all ${
+              className={`relative inline-flex h-10 w-16 items-center rounded-full transition-all cursor-pointer ${
                 formData.isActive ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50' : 'bg-slate-600'
               }`}
             >
@@ -267,7 +267,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 disabled:from-blue-400 disabled:via-purple-400 disabled:to-pink-400 text-white rounded-xl transition-all font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 disabled:scale-100"
+          className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 disabled:from-blue-400 disabled:via-purple-400 disabled:to-pink-400 text-white rounded-xl transition-all font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 disabled:scale-100 cursor-pointer disabled:cursor-not-allowed"
         >
           {isLoading ? 'Processing...' : submitButtonText}
         </button>

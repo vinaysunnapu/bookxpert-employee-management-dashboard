@@ -5,7 +5,7 @@ const ActiveToggle: React.FC<ActiveToggleProps> = ({ isActive, onChange, employe
   return (
     <button
       onClick={() => onChange(!isActive)}
-      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-all shadow-md ${
+      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-all shadow-md cursor-pointer ${
         isActive ? 'bg-emerald-500 shadow-emerald-500/50' : 'bg-slate-600'
       }`}
       aria-label={`Toggle active status for employee ${employeeId}`}

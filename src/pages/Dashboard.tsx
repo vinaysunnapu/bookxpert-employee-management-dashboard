@@ -74,11 +74,9 @@ const Dashboard: React.FC = () => {
   };
 
   const handleDelete = (id: string) => {
-    if (confirm(`Are you sure you want to delete this employee?`)) {
-      const updatedEmployees = employees.filter(emp => emp.id !== id);
-      setEmployees(updatedEmployees);
-      localStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(updatedEmployees));
-    }
+    const updatedEmployees = employees.filter(emp => emp.id !== id);
+    setEmployees(updatedEmployees);
+    localStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(updatedEmployees));
   };
 
   const handleToggleStatus = (id: string, status: boolean) => {
@@ -125,7 +123,7 @@ const Dashboard: React.FC = () => {
           </div>
           <button 
             onClick={() => navigate('/add-employee')}
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl transition-all shadow-lg hover:shadow-2xl font-bold text-base transform hover:scale-105"
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl transition-all shadow-lg hover:shadow-2xl font-bold text-base transform hover:scale-105 cursor-pointer"
           >
             <PlusIcon size={20} /> Add Employee
           </button>
@@ -173,7 +171,7 @@ const Dashboard: React.FC = () => {
             />
             <button 
               onClick={handlePrintList}
-              className="flex items-center gap-2 px-4 py-3 border border-white/20 rounded-xl hover:bg-white/10 transition-all font-medium text-white backdrop-blur-md hover:shadow-lg"
+              className="flex items-center gap-2 px-4 py-3 border border-white/20 rounded-xl hover:bg-white/10 transition-all font-medium text-white backdrop-blur-md hover:shadow-lg cursor-pointer"
             >
               <PrinterIcon size={18} /> Print List
             </button>

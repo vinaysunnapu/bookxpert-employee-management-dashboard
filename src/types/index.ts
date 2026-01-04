@@ -9,3 +9,5 @@ export type { SelectOption, SelectInputProps } from './SelectInputProps';
 export type { ActiveToggleProps } from './ActiveToggleProps';
 export type { HeaderProps } from './HeaderProps';
 export type { FilterOptions } from './FilterOptions';
+export type { DeleteConfirmationModalProps } from './DeleteConfirmationModalProps';
+export type { MessageModalProps } from './MessageModalProps';

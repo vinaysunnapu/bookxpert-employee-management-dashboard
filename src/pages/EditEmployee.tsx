@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Header from '../components/Header';
 import EmployeeForm from '../components/EmployeeForm';
+import MessageModal from '../components/MessageModal';
 import type { Employee } from '../types/Employee';
 import { STORAGE_KEYS } from '../data/constants';
 
@@ -12,6 +13,12 @@ const EditEmployee: React.FC = () => {
   const [employee, setEmployee] = useState<Employee | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingEmployee, setIsLoadingEmployee] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState({
+    type: 'success' as 'success' | 'error',
+    title: '',
+    message: '',
+  });
 
   useEffect(() => {
     // Fetch employee data
@@ -21,8 +28,15 @@ const EditEmployee: React.FC = () => {
     if (foundEmployee) {
       setEmployee(foundEmployee);
     } else {
-      alert('Employee not found');
-      navigate('/dashboard');
+      setModalConfig({
+        type: 'error',
+        title: 'Employee Not Found',
+        message: 'The employee you are trying to edit could not be found.',
+      });
+      setShowModal(true);
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 3100);
     }
     setIsLoadingEmployee(false);
   }, [id, navigate]);
@@ -50,12 +64,24 @@ const EditEmployee: React.FC = () => {
       localStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(updatedEmployees));
 
       // Show success message
-      alert(`Employee ${employeeData.fullName} updated successfully!`);
-      
-      // Redirect to dashboard
-      navigate('/dashboard');
+      setModalConfig({
+        type: 'success',
+        title: 'Employee Updated Successfully',
+        message: `${employeeData.fullName}'s information has been updated.`,
+      });
+      setShowModal(true);
+
+      // Redirect to dashboard after modal closes
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 3100);
     } catch (error) {
-      alert('Failed to update employee. Please try again.');
+      setModalConfig({
+        type: 'error',
+        title: 'Failed to Update Employee',
+        message: 'An error occurred while updating the employee. Please try again.',
+      });
+      setShowModal(true);
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +111,7 @@ const EditEmployee: React.FC = () => {
         <div className="mb-10 flex items-start gap-4">
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 font-bold transition-all border border-blue-500/30 hover:border-blue-500/60 flex-shrink-0 mt-1"
+            className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 font-bold transition-all border border-blue-500/30 hover:border-blue-500/60 flex-shrink-0 mt-1 cursor-pointer"
             title="Back to Dashboard"
           >
             <ArrowLeft size={24} />
@@ -104,6 +130,16 @@ const EditEmployee: React.FC = () => {
           submitButtonText="Update Employee"
         />
       </main>
+
+      {/* Message Modal */}
+      <MessageModal
+        isOpen={showModal}
+        type={modalConfig.type}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        onClose={() => setShowModal(false)}
+        autoClose={3000}
+      />
     </div>
   );
 };

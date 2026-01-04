@@ -3,12 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Header from '../components/Header';
 import EmployeeForm from '../components/EmployeeForm';
+import MessageModal from '../components/MessageModal';
 import type { Employee } from '../types/Employee';
 import { STORAGE_KEYS } from '../data/constants';
 
 const AddEmployee: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalConfig, setModalConfig] = useState({
+    type: 'success' as 'success' | 'error',
+    title: '',
+    message: '',
+  });
 
   const handleLogout = () => {
     navigate('/');
@@ -36,12 +43,24 @@ const AddEmployee: React.FC = () => {
       localStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(updatedEmployees));
 
       // Show success message
-      alert(`Employee ${employeeData.fullName} added successfully!`);
-      
-      // Redirect to dashboard
-      navigate('/dashboard');
+      setModalConfig({
+        type: 'success',
+        title: 'Employee Added Successfully',
+        message: `${employeeData.fullName} has been added to the system.`,
+      });
+      setShowModal(true);
+
+      // Redirect to dashboard after modal closes
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 3100);
     } catch (error) {
-      alert('Failed to add employee. Please try again.');
+      setModalConfig({
+        type: 'error',
+        title: 'Failed to Add Employee',
+        message: 'An error occurred while adding the employee. Please try again.',
+      });
+      setShowModal(true);
     } finally {
       setIsLoading(false);
     }
@@ -56,7 +75,7 @@ const AddEmployee: React.FC = () => {
         <div className="mb-10 flex items-start gap-4">
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 font-bold transition-all border border-blue-500/30 hover:border-blue-500/60 flex-shrink-0 mt-1"
+            className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 font-bold transition-all border border-blue-500/30 hover:border-blue-500/60 flex-shrink-0 mt-1 cursor-pointer"
             title="Back to Dashboard"
           >
             <ArrowLeft size={24} />
@@ -74,6 +93,16 @@ const AddEmployee: React.FC = () => {
           submitButtonText="Add Employee"
         />
       </main>
+
+      {/* Message Modal */}
+      <MessageModal
+        isOpen={showModal}
+        type={modalConfig.type}
+        title={modalConfig.title}
+        message={modalConfig.message}
+        onClose={() => setShowModal(false)}
+        autoClose={3000}
+      />
     </div>
   );
 };
