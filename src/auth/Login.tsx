@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { STORAGE_KEYS } from "../data/constants";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const Login: React.FC = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (email === "admin@bookxpert.com" && password === "admin123") {
-      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem(STORAGE_KEYS.IS_AUTHENTICATED, "true");
       navigate("/dashboard");
     } else {
       setError("Invalid credentials. Hint: admin@bookxpert.com / admin123");

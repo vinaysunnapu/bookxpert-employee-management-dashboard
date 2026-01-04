@@ -1,0 +1,58 @@
+import type { Employee } from '../types';
+
+export const mockEmployees: Employee[] = [
+  {
+    id: 'EMP001',
+    profileImage: 'https://i.pravatar.cc/150?u=john-doe',
+    fullName: 'John Doe',
+    gender: 'Male',
+    dateOfBirth: '1990-05-15',
+    state: 'Maharashtra',
+    isActive: true,
+  },
+  {
+    id: 'EMP002',
+    profileImage: 'https://i.pravatar.cc/150?u=jane-smith',
+    fullName: 'Jane Smith',
+    gender: 'Female',
+    dateOfBirth: '1992-08-22',
+    state: 'Karnataka',
+    isActive: true,
+  },
+  {
+    id: 'EMP003',
+    profileImage: 'https://i.pravatar.cc/150?u=rajesh-kumar',
+    fullName: 'Rajesh Kumar',
+    gender: 'Male',
+    dateOfBirth: '1988-03-10',
+    state: 'Delhi',
+    isActive: true,
+  },
+  {
+    id: 'EMP004',
+    profileImage: 'https://i.pravatar.cc/150?u=priya-sharma',
+    fullName: 'Priya Sharma',
+    gender: 'Female',
+    dateOfBirth: '1995-11-30',
+    state: 'Gujarat',
+    isActive: false,
+  },
+  {
+    id: 'EMP005',
+    profileImage: 'https://i.pravatar.cc/150?u=amit-singh',
+    fullName: 'Amit Singh',
+    gender: 'Male',
+    dateOfBirth: '1991-07-18',
+    state: 'Punjab',
+    isActive: true,
+  },
+  {
+    id: 'EMP006',
+    profileImage: 'https://i.pravatar.cc/150?u=anjali-patel',
+    fullName: 'Anjali Patel',
+    gender: 'Female',
+    dateOfBirth: '1993-09-25',
+    state: 'Maharashtra',
+    isActive: true,
+  },
+];
