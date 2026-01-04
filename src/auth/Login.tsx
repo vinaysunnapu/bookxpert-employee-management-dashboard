@@ -12,7 +12,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     if (email === "admin@bookxpert.com" && password === "admin123") {
       localStorage.setItem(STORAGE_KEYS.IS_AUTHENTICATED, "true");
-      navigate("/dashboard");
+      navigate("/");
     } else {
       setError("Invalid credentials. Hint: admin@bookxpert.com / admin123");
     }
