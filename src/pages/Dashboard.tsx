@@ -22,12 +22,12 @@ const Dashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 5;
 
-  // Requirement: Prevent dashboard access without login [cite: 7]
+  // Requirement: Prevent dashboard access without login
   const navigate = useNavigate();
   
   useEffect(() => {
     const auth = localStorage.getItem(STORAGE_KEYS.IS_AUTHENTICATED);
-    if (!auth) navigate('/');
+    if (!auth) navigate('/login');
     
     // Load employees from localStorage or use mock data
     const savedEmployees = localStorage.getItem(STORAGE_KEYS.EMPLOYEES);
@@ -149,14 +149,14 @@ const Dashboard: React.FC = () => {
           </button>
         </header>
 
-        {/* Stats Grid [cite: 11] */}
+        {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <StatCard title="Total Employees" count={totalEmployees} icon={<UserCheck className="text-blue-400" />} color="bg-gradient-to-br from-blue-900/40 to-blue-800/20 border border-blue-500/30" />
           <StatCard title="Active" count={activeEmployees} icon={<UserCheck className="text-emerald-400" />} color="bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 border border-emerald-500/30" />
           <StatCard title="Inactive" count={inactiveEmployees} icon={<UserMinus className="text-rose-400" />} color="bg-gradient-to-br from-rose-900/40 to-rose-800/20 border border-rose-500/30" />
         </div>
 
-        {/* 2. Search & Combined Filters [cite: 42, 47] */}
+        {/* 2. Search & Combined Filters */}
         <div className="bg-white/5 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-white/10 mb-8 flex flex-wrap gap-4 items-center justify-between">
           <div className="relative flex-1 min-w-[300px]">
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400" size={18} />
@@ -198,7 +198,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* 3. Employee List Table [cite: 12, 13] */}
+        {/* 3. Employee List Table */}
         <EmployeeTable
           employees={paginatedEmployees}
           onEdit={handleEdit}
